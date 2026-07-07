@@ -88,3 +88,12 @@ describe("llm-wiki skill", () => {
     expectNonEmpty("skills/llm-wiki/references/audit-checklist.md");
   });
 });
+
+describe("wiki-context skill", () => {
+  test("has valid frontmatter", () => {
+    expectValidSkill("wiki-context");
+  });
+  test("ships its reference file", () => {
+    expectNonEmpty("skills/wiki-context/references/proposal-sections.md");
+  });
+});
