@@ -49,5 +49,7 @@ Hooks then run automatically on `git commit`. To run against the whole tree:
 `dbaeumer.vscode-eslint` extensions are pre-installed in the devcontainer so
 editor and pre-commit stay aligned.
 
-No changes to `docs/INSTALL.md` — it documents how consumers install the
-plugin, not developer ergonomics.
+`docs/INSTALL.md` is unchanged for content (it documents consumer install,
+not developer ergonomics); markdownlint-cli2 may add blank lines around
+headings/lists there on a future run, which is mechanical and unrelated to
+the install spec.

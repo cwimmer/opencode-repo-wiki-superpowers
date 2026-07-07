@@ -27,6 +27,9 @@ export default [
       // so the hook stays hermetic — this file is plain ESM and runs from
       // ESLint's built-in rule engine.
       "no-undef": "error",
+      // warn (not error): allow stubbed-out args without blocking commits.
+      // A `_`-prefix opt-out pattern is not enforced — the dev can delete the
+      // line if it's unused.
       "no-unused-vars": "warn",
       "no-unreachable": "error",
       "no-dupe-args": "error",

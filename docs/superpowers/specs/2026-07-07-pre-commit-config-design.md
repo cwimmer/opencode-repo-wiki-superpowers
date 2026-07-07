@@ -146,8 +146,10 @@ export default [
 ```
 
 No `import` statements — runs purely on ESLint v9's built-in rule engine.
-Bug-finding only. `eslint --max-warnings 0` runs in the hook so editor and
-pre-commit surface the same set of findings.
+Bug-finding only. The eslint hook runs with no extra args; warnings do not
+block commits (the project prefers a non-blocking lint for early-stage code).
+Editor and pre-commit surface the same set of *errors*; warnings only appear
+in the editor's Problems panel.
 
 ### `.devcontainer/devcontainer.json` edit
 
@@ -230,9 +232,11 @@ tree: `pre-commit run --all-files`. The
 `DavidAnson.vscode-markdownlint` and `dbaeumer.vscode-eslint` extensions are
 pre-installed in the devcontainer so editor and pre-commit stay aligned.
 
-No changes to `docs/INSTALL.md` (it's about plugin install, not developer
-ergonomics). Wiki updates handled by the post-implementation step (§Post-
-implementation wiki refresh below).
+`docs/INSTALL.md` is unchanged for content (it's about plugin install, not
+developer ergonomics); markdownlint-cli2 may add blank lines around
+headings/lists there on a future run, which is mechanical and unrelated to
+the install spec. Wiki updates handled by the post-implementation step
+(§Post-implementation wiki refresh below).
 
 ## Wiki context used
 
