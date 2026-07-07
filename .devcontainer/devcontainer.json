@@ -5,6 +5,7 @@
         "ms-vscode.makefile-tools",
         "Gruntfuggly.todo-tree",
         "DavidAnson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
         "sst-dev.opencode"
       ],
       "settings": {
