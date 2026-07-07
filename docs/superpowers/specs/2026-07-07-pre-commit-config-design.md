@@ -52,7 +52,7 @@ pre-commit hooks. No raw shell.
    `^\.github/workflows/.*\.(yml|yaml)$`. No-op today (no workflows);
    protective only.
 
-4. **`DavidAnson/markdownlint-cli2` (markdownlint-cli2 v0.13.x hook)** — runs
+4. **`DavidAnson/markdownlint-cli2` (markdownlint-cli2 v0.23.x hook)** — runs
    against staged `*.md`. Configured by `.markdownlint.yaml`.
 
 5. **`eslint/eslint` v9.x with flat config.** `additional_dependencies`:
