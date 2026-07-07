@@ -89,7 +89,8 @@ opencode-repo-wiki-superpowers/
 ├── package.json                 # name: "repo-wiki-superpowers", type: "module",
 │                                #   main: "plugins/repo-wiki-superpowers.js"
 ├── opencode.json                # existing; superpowers stays
-├── Makefile                     # root: `test` -> $(MAKE) -C plugins test  (+ existing postCreateCommand)
+├── Makefile                     # root: `test` -> $(MAKE) -C plugins test;
+│                                #   `postCreateCommand` installs bun (npm i -g bun)
 ├── plugins/
 │   ├── Makefile                 # `test` -> bun test
 │   ├── repo-wiki-superpowers.js         # the plugin (config hook only)
@@ -334,6 +335,16 @@ Superpowers. Each consuming repo's `opencode.json`:
 
 Root `Makefile` keeps the existing `postCreateCommand` target and adds `test`.
 `plugins/Makefile` provides `test: bun test`.
+
+**Toolchain note (verified 2026-07-07):** the devcontainer image ships Node
+v26 and OpenCode but **not** a `bun` binary on PATH. Since the validation runner
+is `bun test`, the root `Makefile` `postCreateCommand` target (invoked by
+`.devcontainer/devcontainer.json`) installs Bun via `npm install -g bun`, which
+lands at `/usr/bin/bun` (npm global prefix `/usr`, already on PATH). Verified:
+`npm install -g bun` → `bun 1.3.14`, and `bun test` passes on green and exits
+non-zero on failure. `npm`'s `allow-scripts` warning is benign — the modern
+`bun` package ships the native binary as an optional dependency, so it works
+without the postinstall script.
 
 ## 11. Success-criteria mapping
 
