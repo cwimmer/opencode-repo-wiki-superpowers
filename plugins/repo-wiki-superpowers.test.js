@@ -97,3 +97,12 @@ describe("wiki-context skill", () => {
     expectNonEmpty("skills/wiki-context/references/proposal-sections.md");
   });
 });
+
+describe("install docs", () => {
+  test("INSTALL.md documents the git+https install spec", () => {
+    const txt = fs.readFileSync(path.join(root, "docs/INSTALL.md"), "utf8");
+    expect(txt).toContain(
+      "repo-wiki-superpowers@git+https://github.com/cwimmer/opencode-repo-wiki-superpowers.git"
+    );
+  });
+});
