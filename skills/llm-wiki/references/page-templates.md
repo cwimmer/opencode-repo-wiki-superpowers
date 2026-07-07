@@ -11,9 +11,9 @@ Confidence / gaps honest.
     code; each page's **Source map** links back to it.
 
     ## Pages
-    - [[repo-map]] — directory and module map
-    - [[architecture]] — components and data flow
-    - [[open-questions]] — open questions and pending decisions
+    - [repo-map](repo-map.md) — directory and module map
+    - [architecture](architecture.md) — components and data flow
+    - [open-questions](open-questions.md) — open questions and pending decisions
     <!-- add optional pages here as they are created -->
 
     _Updated: YYYY-MM-DD_
@@ -29,7 +29,7 @@ Confidence / gaps honest.
 
     # <title>
 
-    <body, using [[links]] to related pages>
+    <body, using [page-name](page-name.md) links to related pages>
 
     ## Source map
     - `path/to/file` — <what this page draws from it>

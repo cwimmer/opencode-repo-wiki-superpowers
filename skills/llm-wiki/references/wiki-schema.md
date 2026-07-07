@@ -44,5 +44,8 @@ Every content page ends with:
 
 ## Naming and links
 - Filenames: kebab-case (`repo-map.md`).
-- Internal links: `[[page-name]]` (omit the `.md`).
+- Internal links: standard Markdown `[page-name](page-name.md)` (relative
+  path from the current page to the target). Do NOT use wiki-link syntax
+  (double square brackets around a page name) — it does not render in VS
+  Code's built-in Markdown reader.
 - Source references: always a repo-relative path in the Source map.

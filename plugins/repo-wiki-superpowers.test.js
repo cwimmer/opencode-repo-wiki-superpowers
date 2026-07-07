@@ -106,3 +106,38 @@ describe("install docs", () => {
     );
   });
 });
+
+// VS Code's built-in Markdown reader (CommonMark/markdown-it) renders
+// `[[wiki-links]]` as literal text. Every Markdown file shipped or generated
+// by this plugin must be readable in that viewer, so no `[[...]]` link
+// pattern is allowed in skill sources or in committed docs/wiki pages.
+function walkMarkdown(dir) {
+  const out = [];
+  if (!fs.existsSync(dir)) return out;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walkMarkdown(p));
+    else if (entry.isFile() && entry.name.endsWith(".md")) out.push(p);
+  }
+  return out;
+}
+
+describe("no wikilinks in shipped markdown", () => {
+  test("no [[...]] link pattern under skills/", () => {
+    const files = walkMarkdown(skillsDir);
+    expect(files.length).toBeGreaterThan(0);
+    for (const p of files) {
+      const content = fs.readFileSync(p, "utf8");
+      expect(content).not.toMatch(/\[\[[^\]\n]+?\]\]/);
+    }
+  });
+  test("no [[...]] link pattern under docs/wiki/ when present", () => {
+    const wikiDir = path.join(root, "docs/wiki");
+    if (!fs.existsSync(wikiDir)) return;
+    const files = walkMarkdown(wikiDir);
+    for (const p of files) {
+      const content = fs.readFileSync(p, "utf8");
+      expect(content).not.toMatch(/\[\[[^\]\n]+?\]\]/);
+    }
+  });
+});

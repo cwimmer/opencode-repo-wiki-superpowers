@@ -1,7 +1,7 @@
 # Proposal sections (paste into the design)
 
 ## Wiki context used
-- [[page-name]] — how it informed the design
+- [page-name](page-name.md) — how it informed the design
 - (list every wiki page you actually relied on; write "none" if the wiki was
   absent)
 

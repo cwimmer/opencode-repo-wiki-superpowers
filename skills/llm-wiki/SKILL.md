@@ -39,7 +39,11 @@ pasted text.
 3. In each page's `## Source map`, list every source file it draws from, one
    line each.
 4. In `## Confidence / gaps`, record what is solid vs. inferred/uncertain.
-5. Maintain `[[wiki-links]]` between related pages.
+5. Maintain standard Markdown cross-links between related pages using
+   `[page-name](page-name.md)` (or the appropriate relative path from the
+   current file to the target). Do NOT use wiki-link syntax (double square
+   brackets around a page name) — it does not render in VS Code's built-in
+   Markdown reader (CommonMark) and other non-Obsidian viewers.
 6. Update `docs/wiki/README.md` so the index lists every page.
 7. Set each touched page's `updated:` frontmatter to today's date.
 8. Never invent behavior. If the source does not show it, say so under
