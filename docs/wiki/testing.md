@@ -86,6 +86,23 @@ package ships the native binary as an optional dependency, so the postinstall
 script is unnecessary. The plugin's plan documents the verification command
 `bun --version` (typically `1.3.14`) and `make test` exiting 0 on green.
 
+## Test gate vs. pre-commit (hygiene) gate
+
+`make test` is the **authoritative test gate** — the single `bun test` suite
+in `plugins/` asserts plugin shape, dogfood shim, skill frontmatter +
+reference existence, and the install-doc spec string. Nothing else runs in
+test mode.
+
+`pre-commit run --all-files` is a **separate, opt-in hygiene gate** wired
+through `.pre-commit-config.yaml` (see [operations](operations.md) for
+install). It runs `markdownlint-cli2 --fix`, `eslint`, `yamllint`,
+`actionlint`, and the pre-commit-hooks set (`check-json`, `check-toml`,
+`trailing-whitespace`, etc.) over the working tree. It does **not** run
+`bun test`, and `make test` does **not** run the lint hooks. The two gates
+are complementary: `make test` proves the plugin still works; pre-commit
+keeps markdown, YAML, JSON, and JS clean across the repo. Both must be
+green before a tagged release.
+
 ## Source map
 
 - `Makefile` — `test` target delegates to `plugins/Makefile`.
@@ -105,9 +122,14 @@ script is unnecessary. The plugin's plan documents the verification command
 - `docs/superpowers/specs/2026-07-07-repo-wiki-superpowers-design.md` §10
   — validation rules and toolchain notes.
 - `.devcontainer/devcontainer.json` — `postCreateCommand: make postCreateCommand`.
+- `.pre-commit-config.yaml` — the separate hygiene gate (`markdownlint-cli2 --fix`,
+  `eslint`, `yamllint`, `actionlint`, pre-commit-hooks); not part of `make test`.
+- `.markdownlint.yaml` — rule disables that justify the markdown style.
+- `eslint.config.js` — flat-config ESLint for the test target's source files.
 
 ## Confidence / gaps
 
 - Solid: how to run; what the suite covers block-by-block; what it
-  intentionally does not cover; toolchain install path.
+  intentionally does not cover; toolchain install path; the
+  `make test` vs `pre-commit run --all-files` separation.
 - Uncertain / to verify: nothing material to the test surface.
