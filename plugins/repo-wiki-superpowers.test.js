@@ -66,3 +66,14 @@ describe("plugin registration", () => {
     expect(config.skills.paths.filter((p) => p === skillsDir).length).toBe(1);
   });
 });
+
+describe("dogfood shim", () => {
+  test("re-exports a working plugin", async () => {
+    const mod = await import("../.opencode/plugins/repo-wiki-superpowers.js");
+    expect(typeof mod.RepoWikiSuperpowersPlugin).toBe("function");
+    const hooks = await mod.RepoWikiSuperpowersPlugin({});
+    const config = {};
+    await hooks.config(config);
+    expect(config.skills.paths).toContain(skillsDir);
+  });
+});
