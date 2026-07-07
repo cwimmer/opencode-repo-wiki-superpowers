@@ -32,3 +32,22 @@ See [docs/INSTALL.md](docs/INSTALL.md). Short version — add to each repo's
   `make postCreateCommand`).
 - Skills live in `skills/`; the plugin is `plugins/repo-wiki-superpowers.js`.
 - Design spec: `docs/superpowers/specs/2026-07-07-repo-wiki-superpowers-design.md`.
+
+### Pre-commit hooks (optional)
+
+This repo includes a `.pre-commit-config.yaml` for local hygiene checks
+(YAML, GitHub Actions, JSON/TOML parsing, trailing whitespace, oversized
+files, merge-conflict markers, markdownlint, ESLint). To enable locally:
+
+```
+pip install pre-commit
+pre-commit install
+```
+
+Hooks then run automatically on `git commit`. To run against the whole tree:
+`pre-commit run --all-files`. The `DavidAnson.vscode-markdownlint` and
+`dbaeumer.vscode-eslint` extensions are pre-installed in the devcontainer so
+editor and pre-commit stay aligned.
+
+No changes to `docs/INSTALL.md` — it documents how consumers install the
+plugin, not developer ergonomics.
