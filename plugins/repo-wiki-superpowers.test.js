@@ -77,3 +77,14 @@ describe("dogfood shim", () => {
     expect(config.skills.paths).toContain(skillsDir);
   });
 });
+
+describe("llm-wiki skill", () => {
+  test("has valid frontmatter", () => {
+    expectValidSkill("llm-wiki");
+  });
+  test("ships its reference files", () => {
+    expectNonEmpty("skills/llm-wiki/references/wiki-schema.md");
+    expectNonEmpty("skills/llm-wiki/references/page-templates.md");
+    expectNonEmpty("skills/llm-wiki/references/audit-checklist.md");
+  });
+});
