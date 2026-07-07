@@ -118,7 +118,9 @@ its test together, and lets the **root Makefile `test` target delegate** to
 `plugins/Makefile`. OpenCode still loads the plugin because the **root**
 `package.json` `main` points into `plugins/`. The `.opencode/plugins/` re-export
 is only for dogfooding this repo locally (so local edits load without pulling
-from GitHub); consuming repos never see it.
+from GitHub); consuming repos receive the file inside the package but never load
+it, because OpenCode auto-loads `.opencode/plugins/` only for the *current*
+project, not for an installed dependency.
 
 ## 6. Component: the plugin
 
