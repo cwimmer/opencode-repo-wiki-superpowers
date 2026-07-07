@@ -1,0 +1,5 @@
+default: true
+MD013: false   # line length — long sentences / tables are common
+MD033: false   # inline HTML (used in tables and reference rows)
+MD041: false   # first-line H1 not required (wiki/README files omit)
+MD024: false   # duplicate sibling headings OK (design spec reuses names)

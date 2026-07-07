@@ -1,0 +1,37 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-json
+        exclude: ^(node_modules/|\.opencode/|\.devcontainer/devcontainer-lock\.json|.*package-lock\.json)
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: ['--strict', '--config-data={extends: relaxed, rules: {line-length: disable}}']
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.7
+    hooks:
+      - id: actionlint
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.13.1
+    hooks:
+      - id: markdownlint-cli2
+
+  - repo: https://github.com/eslint/eslint
+    rev: v9.15.0
+    hooks:
+      - id: eslint
+        files: \.(js|mjs|cjs)$
+        additional_dependencies:
+          - eslint@9.15.0
+          - '@eslint/js@9.15.0'
+          - globals@15.12.0
