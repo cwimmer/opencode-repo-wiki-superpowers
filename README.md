@@ -4,6 +4,7 @@ An OpenCode plugin that integrates the **Karpathy LLM Wiki** documentation
 workflow with **obra/superpowers**.
 
 It ships two skills:
+
 - **`llm-wiki`** — build, query, and audit a repo documentation wiki under
   `docs/wiki/` (each page cites its source files).
 - **`wiki-context`** — make a Superpowers *brainstorming* session use that wiki
@@ -12,6 +13,7 @@ It ships two skills:
 > The wiki gives Brainstorming memory; the source-map rule keeps it honest.
 
 ## Install
+
 See [docs/INSTALL.md](docs/INSTALL.md). Short version — add to each repo's
 `opencode.json`:
 
@@ -25,6 +27,7 @@ See [docs/INSTALL.md](docs/INSTALL.md). Short version — add to each repo's
 ```
 
 ## Develop
+
 - `make test` — run the plugin test suite (bun is installed by
   `make postCreateCommand`).
 - Skills live in `skills/`; the plugin is `plugins/repo-wiki-superpowers.js`.

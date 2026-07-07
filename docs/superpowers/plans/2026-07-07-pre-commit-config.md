@@ -88,11 +88,13 @@ opencode-repo-wiki-superpowers/
 ### Task 1: Add the three root config files
 
 **Files:**
+
 - Create: `.pre-commit-config.yaml`
 - Create: `.markdownlint.yaml`
 - Create: `eslint.config.js`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: the three config files. Subsequent tasks consume
   `.pre-commit-config.yaml` (Task 3 — `pre-commit run`) and the devcontainer
@@ -180,6 +182,7 @@ export default [
 - [ ] **Step 4: Verify the three files parse / lint cleanly**
 
 Run:
+
 ```
 pre-commit validate-config .pre-commit-config.yaml 2>/dev/null || pre-commit validate-config
 yamllint --strict --config-data="{extends: relaxed, rules: {line-length: disable}}" .pre-commit-config.yaml
@@ -207,9 +210,11 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "feat: add 
 ### Task 2: Add `dbaeumer.vscode-eslint` to the devcontainer
 
 **Files:**
+
 - Modify: `.devcontainer/devcontainer.json`
 
 **Interfaces:**
+
 - Consumes: the existing `.devcontainer/devcontainer.json` (its
   `customizations.vscode.extensions` array) — read it first; do not reorder
   the existing entries.
@@ -222,6 +227,7 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "feat: add 
 - [ ] **Step 1: Read the current devcontainer config**
 
 Run:
+
 ```
 cat .devcontainer/devcontainer.json
 ```
@@ -262,6 +268,7 @@ Do not change anything else in the file. Preserve all other keys verbatim.
 - [ ] **Step 3: Validate JSON is still valid**
 
 Run:
+
 ```
 node -e "JSON.parse(require('fs').readFileSync('.devcontainer/devcontainer.json','utf8')); console.log('ok')"
 ```
@@ -272,6 +279,7 @@ or dropped a comma — re-open the file and check.
 - [ ] **Step 4: Confirm no other field changed**
 
 Run:
+
 ```
 git diff .devcontainer/devcontainer.json
 ```
@@ -293,6 +301,7 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "chore(devc
 ### Task 3: Install pre-commit, run hooks, apply autofixes
 
 **Files:**
+
 - Modify (autofix only, may or may not actually mutate):
   - `skills/wiki-context/SKILL.md`
   - `skills/wiki-context/references/proposal-sections.md`
@@ -301,6 +310,7 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "chore(devc
   (if they ever run with `--fix`) markdownlint-cli2 / eslint decide to mutate.
 
 **Interfaces:**
+
 - Consumes: the three configs from Task 1, the devcontainer edit from Task 2.
 - Produces: a working `pre-commit` install on the developer's machine
   (`.git/hooks/pre-commit` script present) and one autofix commit covering
@@ -311,11 +321,13 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "chore(devc
 - [ ] **Step 1: Verify `pre-commit` is on PATH**
 
 Run:
+
 ```
 pre-commit --version
 ```
 
 If the command is not found, install the Python tool:
+
 ```
 pip install --user 'pre-commit>=4,<5'
 export PATH="$HOME/.local/bin:$PATH"
@@ -329,6 +341,7 @@ invocations are offline.)
 - [ ] **Step 2: Install the git hook for the active repo**
 
 Run:
+
 ```
 pre-commit install
 ```
@@ -338,6 +351,7 @@ Expected: prints `pre-commit installed at .git/hooks/pre-commit` and exits 0.
 - [ ] **Step 3: Run all hooks against the full tree**
 
 Run:
+
 ```
 pre-commit run --all-files
 ```
@@ -348,6 +362,7 @@ Expected: every hook either prints `Passed` or, for the autofix hooks
 expected behavior — pre-commit re-runs them on the next iteration).
 
 Notes:
+
 - Markdownlint-cli2 and ESLint do **not** auto-fix by default in their
   pre-commit hook form. If they emit warnings/errors on existing content,
   the failures fall into two categories (handled in Step 6):
@@ -363,6 +378,7 @@ Notes:
 - [ ] **Step 4: If autofix hooks modified files, list them**
 
 Run:
+
 ```
 git status --porcelain
 ```
@@ -373,6 +389,7 @@ expected mutations are documented in Global Constraints.
 - [ ] **Step 5: Re-run hooks to confirm autofix passes cleanly**
 
 Run:
+
 ```
 pre-commit run --all-files
 ```
@@ -423,9 +440,11 @@ commit and proceed to Task 4.
 ### Task 4: Document the pre-commit setup in README
 
 **Files:**
+
 - Modify: `README.md` (append a subsection under `## Develop`)
 
 **Interfaces:**
+
 - Consumes: the existing `## Develop` section in `README.md` (verified via
   Step 1's read).
 - Produces: a new `### Pre-commit hooks (optional)` subsection at the end of
@@ -434,6 +453,7 @@ commit and proceed to Task 4.
 - [ ] **Step 1: Read the existing `## Develop` block**
 
 Run:
+
 ```
 sed -n '/^## Develop/,/^## /p' README.md | head -n 40
 ```
@@ -482,6 +502,7 @@ markdown handles either, but match the surrounding style).
 - [ ] **Step 3: Verify the diff is local**
 
 Run:
+
 ```
 git diff README.md
 ```
@@ -502,9 +523,11 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "docs(readm
 ### Task 5: Final verification — pre-commit + make test both green
 
 **Files:**
+
 - No edits. This task is read-only verification.
 
 **Interfaces:**
+
 - Consumes: all four preceding tasks. Must run cleanly before the plan is
   considered done (per the design spec §Testing).
 - Produces: a recorded pass/fail report in the engineer's final reply.
@@ -512,6 +535,7 @@ git -c user.name="opencode" -c user.email="opencode@local" commit -m "docs(readm
 - [ ] **Step 1: Confirm the working tree is clean**
 
 Run:
+
 ```
 git status --porcelain
 ```
@@ -522,6 +546,7 @@ an earlier task; commit it (or discard it) before proceeding.
 - [ ] **Step 2: Run pre-commit against the full tree**
 
 Run:
+
 ```
 pre-commit run --all-files
 ```
@@ -537,6 +562,7 @@ Expected: every hook prints `Passed`, exit 0. If a hook fails:
 - [ ] **Step 3: Run the existing test suite**
 
 Run:
+
 ```
 make test
 ```
@@ -550,6 +576,7 @@ that is unrelated to this plan and should be investigated separately —
 - [ ] **Step 4: Smoke-check yamllint against its own config**
 
 Run:
+
 ```
 pre-commit run yamllint --all-files
 ```
@@ -561,6 +588,7 @@ the relaxed preset.
 - [ ] **Step 5: Smoke-check ESLint against the plugin sources**
 
 Run:
+
 ```
 pre-commit run eslint --all-files
 ```
@@ -587,11 +615,13 @@ constraint, the fix should be a per-file targeted edit, not a config gut).
 ### Task 6: Refresh the wiki with the `llm-wiki` skill
 
 **Files:**
+
 - Modify (potentially): `docs/wiki/operations.md`,
   `docs/wiki/repo-map.md`, `docs/wiki/testing.md`.
 - Possibly: a new `docs/wiki/tooling.md` (deferred to the skill's judgement).
 
 **Interfaces:**
+
 - Consumes: the four-now-five wiki pages (per `docs/wiki/README.md`); the
   final state of the repo (Tasks 1-5 complete). All four prior tasks' artifacts
   (`.pre-commit-config.yaml`, `.markdownlint.yaml`, `eslint.config.js`, the
@@ -621,6 +651,7 @@ The skill is most likely to touch:
   `bun test` remains the test gate.
 
 Run:
+
 ```
 git status --porcelain docs/wiki/
 ```
@@ -635,6 +666,7 @@ re-run with the explicit "include the new pre-commit / linting surface" scope.
       real artifact, not just mentions it in prose**
 
 Run:
+
 ```
 git diff docs/wiki/ | grep -E '^\+.*\.md' | grep -v '^+++'
 ```
@@ -657,6 +689,7 @@ final reply.
 - [ ] **Step 5: Re-run both gates one more time**
 
 Run:
+
 ```
 pre-commit run --all-files
 make test

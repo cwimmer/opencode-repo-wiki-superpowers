@@ -37,6 +37,7 @@ optional `AGENTS.md` snippet for per-repo automation. Treat name-in-prompt
 as the load-bearing mechanism.
 
 ## 3. Does OpenCode load a plugin from a `git+https` install when the root
+
    `package.json` `main` points to a subdirectory?
 
 **Where from.** Design spec §12 again, listed under "OpenCode git+https
@@ -75,6 +76,7 @@ audit (e.g. after every tagged release) worth adding to `make test`?
 Current answer: no — YAGNI and stays model-agnostic.
 
 ## Source map
+
 - `docs/superpowers/specs/2026-07-07-repo-wiki-superpowers-design.md` §12
   — explicit list of risks/open questions from the design.
 - `docs/INSTALL.md` — install spec, prompt-template, `AGENTS.md` snippet.
@@ -90,6 +92,7 @@ Current answer: no — YAGNI and stays model-agnostic.
 - [integrations](integrations.md) — integration surface (OpenCode + Superpowers).
 
 ## Confidence / gaps
+
 - Solid: the questions themselves and where each came from.
 - Uncertain / to verify: the answers to #1, #2, #3 (each requires network or
   an actual tagged install to confirm).

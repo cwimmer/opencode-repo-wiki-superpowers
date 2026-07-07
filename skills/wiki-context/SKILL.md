@@ -15,10 +15,12 @@ This skill **composes with** `superpowers:brainstorming`; it does not replace or
 fork it. Use both together.
 
 ## When to use
+
 At the very start of any brainstorming, planning, or design task in a repo that
 has `docs/wiki/` — before the first clarifying question.
 
 ## Procedure (before design questions)
+
 1. **Check for the wiki.** If `docs/wiki/README.md` exists, read it (the index).
    If it does NOT exist, note that and fall back to normal Superpowers
    context-gathering (files, docs, tests, recent commits); stop this procedure.
@@ -36,13 +38,16 @@ has `docs/wiki/` — before the first clarifying question.
    for that).
 
 ## Design proposal additions
+
 When you present the design, include the two sections from
 `references/proposal-sections.md`:
+
 - **Wiki context used** — which wiki pages informed the design.
 - **Source-grounding notes** — split into *Confirmed-from-source*,
   *Inferred-from-source*, *Still-uncertain*.
 
 ## Wiring it into your prompt
+
 Add one line to your Superpowers brainstorming prompt, next to
 "Use the Superpowers brainstorming skill for this task.":
 

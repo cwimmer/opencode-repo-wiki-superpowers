@@ -52,6 +52,7 @@ spec's §5.1. Optional paths are omitted when not present.
 | `.opencode/plugins/repo-wiki-superpowers.js` | One-line re-export of `RepoWikiSuperpowersPlugin` so editing `plugins/repo-wiki-superpowers.js` takes effect locally. OpenCode auto-loads `.opencode/plugins/` of the *current* project, not of installed dependencies. |
 
 ## Source map
+
 - `package.json` — plugin manifest.
 - `opencode.json` — repo's own OpenCode config (does not yet list this plugin;
   the plugin is loaded via the local dogfood shim).
@@ -68,6 +69,7 @@ spec's §5.1. Optional paths are omitted when not present.
 - `.gitignore` — excludes `.superpowers/sdd/` (local SDD ledger).
 
 ## Confidence / gaps
+
 - Solid: top-level layout, plugin location, skill location, doc location.
 - Uncertain / to verify: nothing — every path listed above exists and was
   verified by `read`.

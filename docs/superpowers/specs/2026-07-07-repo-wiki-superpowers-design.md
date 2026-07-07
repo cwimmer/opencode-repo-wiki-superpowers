@@ -220,7 +220,7 @@ Every page carries YAML frontmatter and two required sections:
 ```markdown
 ---
 title: <page title>
-type: overview | repo-map | architecture | domain | testing | ... 
+type: overview | repo-map | architecture | domain | testing | ...
 updated: YYYY-MM-DD
 confidence: high | medium | low
 ---
@@ -370,4 +370,5 @@ without the postinstall script.
 - **Page set breadth**: the optional pages are YAGNI-gated; only `README.md`,
   `repo-map.md`, `architecture.md`, `open-questions.md` are load-bearing for the
   bridge.
+
 ```

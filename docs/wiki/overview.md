@@ -67,6 +67,7 @@ cites the real source files it draws from in its `## Source map`. The
 repo that installs it ([testing](testing.md)).
 
 ## Source map
+
 - `README.md` — short pitch, install snippet, develop pointer.
 - `package.json` — plugin package name and `main` entry the OpenCode plugin
   loader reads.
@@ -78,6 +79,7 @@ repo that installs it ([testing](testing.md)).
 - `skills/wiki-context/SKILL.md` — the `wiki-context` skill body.
 
 ## Confidence / gaps
+
 - Solid: scope (two skills, skill-only plugin), public install spec, package
   name and `main`, design status.
 - Uncertain / to verify: whether the `v0.1.0` git tag referenced by the install

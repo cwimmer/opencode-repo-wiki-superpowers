@@ -5,7 +5,7 @@ repos:
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-json
-        exclude: ^(node_modules/|\.opencode/|\.devcontainer/devcontainer-lock\.json|.*package-lock\.json)
+        exclude: ^(node_modules/|\.opencode/|\.devcontainer/|.*package-lock\.json)
       - id: check-toml
       - id: end-of-file-fixer
       - id: trailing-whitespace
@@ -25,6 +25,7 @@ repos:
     rev: v0.23.0
     hooks:
       - id: markdownlint-cli2
+        args: ['--fix']  # auto-add blank lines around headings/lists/fences
 
   - repo: https://github.com/eslint/eslint
     rev: v9.15.0
@@ -33,5 +34,3 @@ repos:
         files: \.(js|mjs|cjs)$
         additional_dependencies:
           - eslint@9.15.0
-          - '@eslint/js@9.15.0'
-          - globals@15.12.0

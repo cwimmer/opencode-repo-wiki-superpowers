@@ -55,6 +55,7 @@ export const RepoWikiSuperpowersPlugin = async () => {
 ```
 
 Properties:
+
 - Resolves `skills` relative to the plugin file so it works both from the
   working tree and from `~/.cache/opencode/node_modules/<pkg>/`.
 - No `os.homedir()`, no env reads, no network, no tools, no
@@ -92,6 +93,7 @@ cycle. Consuming repos never load this file (they would not have a local
 
 Composes with `superpowers:brainstorming`; does not replace or fork it.
 Procedure:
+
 1. If `docs/wiki/README.md` exists, read the index.
 2. Read `repo-map.md`, `architecture.md`, `open-questions.md` when present;
    then only the task-relevant additional pages.
@@ -173,6 +175,7 @@ spec's goals include (per §2):
   ([open-questions](open-questions.md) lists the residual risks).
 
 ## Source map
+
 - `plugins/repo-wiki-superpowers.js` — the plugin and its `config` hook.
 - `.opencode/plugins/repo-wiki-superpowers.js` — local dogfood re-export.
 - `package.json` — `main` entry the loader reads.
@@ -185,6 +188,7 @@ spec's goals include (per §2):
   §7.1 (`docs/wiki/` layout + schema), §8 (`wiki-context`), §9 (distribution).
 
 ## Confidence / gaps
+
 - Solid: skill-only plugin shape; the two skills' responsibilities;
   registration mechanism (`config.skills.paths`); idempotency; bridge
   composes-with-brainstorming.

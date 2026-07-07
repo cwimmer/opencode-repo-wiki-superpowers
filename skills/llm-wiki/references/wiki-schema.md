@@ -43,6 +43,7 @@ Every content page ends with:
     - Uncertain / to verify: ...
 
 ## Naming and links
+
 - Filenames: kebab-case (`repo-map.md`).
 - Internal links: standard Markdown `[page-name](page-name.md)` (relative
   path from the current page to the target). Do NOT use wiki-link syntax

@@ -53,12 +53,16 @@ pre-commit hooks. No raw shell.
    protective only.
 
 4. **`DavidAnson/markdownlint-cli2` (markdownlint-cli2 v0.23.x hook)** — runs
-   against staged `*.md`. Configured by `.markdownlint.yaml`.
+   against staged `*.md` with `args: ['--fix']` so auto-fixable rules
+   (blanks around headings / lists / fences) get applied automatically on
+   the staged content. Configured by `.markdownlint.yaml`.
 
 5. **`eslint/eslint` v9.x with flat config.** `additional_dependencies`:
-   `eslint`, `@eslint/js`, `globals`. Lints `plugins/**/*.js` and
-   `.opencode/plugins/**/*.js`. Bug-only rules; no stylistic rules. See
-   `eslint.config.js` below.
+   `eslint` only (no `@eslint/js`, no `globals` — the project's
+   `node_modules` doesn't exist, and pre-commit's hook environment can't
+   satisfy imports from user-source JS files). Lints `plugins/**/*.js`
+   and `.opencode/plugins/**/*.js`. Bug-only rules; no stylistic rules.
+   See `eslint.config.js` below.
 
 The `fail_fast` flag is left at its pre-commit default (off) so the dev sees
 all findings in one pass.
@@ -71,40 +75,77 @@ defaults already pre-installed in the devcontainer (see
 
 ```yaml
 default: true
-MD013: false   # line length — long sentences / tables are common
-MD033: false   # inline HTML (used in tables and reference rows)
-MD041: false   # first-line H1 not required (wiki/README files omit)
-MD024: false   # duplicate sibling headings OK (design spec reuses names)
+MD013: false   # line length — long sentences / URLs / tables are common
+MD024: false   # duplicate sibling headings — design spec reuses names
+MD025: false   # single-h1 — wiki pages have frontmatter title + body title
+MD031: false   # blanks-around-fences — autofix inserts blanks INSIDE code blocks
+MD033: false   # inline HTML — used in tables and reference rows
+MD036: false   # emphasis-as-heading — wiki pages use italic for "Updated:" footers
+MD040: false   # fenced code without language — outputs/diffs often have no language
+MD041: false   # first-line H1 required — wiki README/index files omit it
+MD046: false   # code-block-style — both fenced and indented code coexist in wiki
 ```
 
 If markdownlint fires on existing content with another rule, the fix is per-
 commit (small doc edit) OR an explicit rule-disable PR — both valid. We do
 not silently disable more rules.
 
-### `eslint.config.js` (new, ESLint v9 flat config)
+### `eslint.config.js` (new, ESLint v9 flat config, no external imports)
 
 ```js
-import js from "@eslint/js";
-import globals from "globals";
-
 export default [
-  js.configs.recommended,
   {
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: "module",
-      globals: { ...globals.node }
+      globals: {
+        // Node.js + Bun globals actually used by plugins/
+        process: "readonly",
+        Buffer: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        console: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        // Bun test globals used in plugins/*.test.js
+        describe: "readonly",
+        test: "readonly",
+        expect: "readonly"
+      }
     },
     files: ["plugins/**/*.js", ".opencode/plugins/**/*.js"],
     rules: {
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-      "no-undef": "error"
+      // Curated subset of eslint:recommended (flat config). Bug-finders
+      // only; no stylistic rules. @eslint/js intentionally not imported
+      // so the hook stays hermetic.
+      "no-undef": "error",
+      "no-unused-vars": "warn",
+      "no-unreachable": "error",
+      "no-dupe-args": "error",
+      "no-dupe-keys": "error",
+      "no-dupe-class-members": "error",
+      "no-const-assign": "error",
+      "no-class-assign": "error",
+      "no-func-assign": "error",
+      "no-import-assign": "error",
+      "no-this-before-super": "error",
+      "no-new-symbol": "error",
+      "no-obj-calls": "error",
+      "no-self-assign": "error",
+      "no-setter-return": "error",
+      "constructor-super": "error",
+      "no-empty-pattern": "error",
+      "no-debugger": "error",
+      "no-with": "error"
     }
   },
   { ignores: ["node_modules/**", ".opencode/node_modules/**"] }
 ];
 ```
 
+No `import` statements — runs purely on ESLint v9's built-in rule engine.
 Bug-finding only. `eslint --max-warnings 0` runs in the hook so editor and
 pre-commit surface the same set of findings.
 

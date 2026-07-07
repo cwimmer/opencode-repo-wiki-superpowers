@@ -83,6 +83,7 @@ target is responsible for that install; `plugins/Makefile`'s `test` target
 runs `bun test`.
 
 ## Source map
+
 - `package.json` — plugin `name`, `type`, `main` (OpenCode loader contract).
 - `plugins/repo-wiki-superpowers.js` — `config` hook uses
   `config.skills.paths`.
@@ -100,6 +101,7 @@ runs `bun test`.
 - `Makefile` — `postCreateCommand` target that installs `bun`.
 
 ## Confidence / gaps
+
 - Solid: integration surface is exactly OpenCode + Superpowers + GitHub;
   HTTPS-public is the documented default; one prompt-template line is the
   full bridge; `wiki-context` composes with the host `brainstorming` skill.

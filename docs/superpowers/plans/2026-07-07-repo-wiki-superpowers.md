@@ -54,6 +54,7 @@ opencode-repo-wiki-superpowers/
 ### Task 1: Toolchain + plugin core
 
 **Files:**
+
 - Create: `package.json`
 - Create: `Makefile` (replaces the current 5-line stub)
 - Create: `plugins/Makefile`
@@ -61,6 +62,7 @@ opencode-repo-wiki-superpowers/
 - Test: `plugins/repo-wiki-superpowers.test.js`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `export const RepoWikiSuperpowersPlugin = async () => ({ config })` where `config(config)` pushes `path.resolve(<plugin dir>, "../skills")` onto `config.skills.paths` idempotently. Test helpers `readFrontmatter(name)`, `expectValidSkill(name)`, `expectNonEmpty(relPath)`, and the constants `root`/`skillsDir` are defined in the test file and reused by later tasks.
 
@@ -82,13 +84,13 @@ opencode-repo-wiki-superpowers/
 .PHONY: postCreateCommand test
 
 postCreateCommand:
-	@echo "Running post create command"
-	@echo "Installing bun"
-	npm install -g bun
-	@echo "Post create command completed"
+ @echo "Running post create command"
+ @echo "Installing bun"
+ npm install -g bun
+ @echo "Post create command completed"
 
 test:
-	$(MAKE) -C plugins test
+ $(MAKE) -C plugins test
 ```
 
 - [ ] **Step 3: Create `plugins/Makefile`** (indent recipe lines with a TAB)
@@ -97,7 +99,7 @@ test:
 .PHONY: test
 
 test:
-	bun test
+ bun test
 ```
 
 - [ ] **Step 4: Install bun via the postCreateCommand target**
@@ -231,10 +233,12 @@ git commit -m "feat: plugin core registers bundled skills path + toolchain"
 ### Task 2: Local dogfood shim
 
 **Files:**
+
 - Create: `.opencode/plugins/repo-wiki-superpowers.js`
 - Test: `plugins/repo-wiki-superpowers.test.js` (append one `describe` block)
 
 **Interfaces:**
+
 - Consumes: `RepoWikiSuperpowersPlugin` from `plugins/repo-wiki-superpowers.js`.
 - Produces: `.opencode/plugins/repo-wiki-superpowers.js` re-exporting the same symbol, so OpenCode auto-loads the plugin when THIS repo is opened locally.
 
@@ -284,6 +288,7 @@ git commit -m "feat: add local dogfood plugin shim"
 ### Task 3: `llm-wiki` skill (build / query / audit)
 
 **Files:**
+
 - Create: `skills/llm-wiki/SKILL.md`
 - Create: `skills/llm-wiki/references/wiki-schema.md`
 - Create: `skills/llm-wiki/references/page-templates.md`
@@ -291,6 +296,7 @@ git commit -m "feat: add local dogfood plugin shim"
 - Test: `plugins/repo-wiki-superpowers.test.js` (append one `describe` block)
 
 **Interfaces:**
+
 - Consumes: `expectValidSkill`, `expectNonEmpty` (from Task 1).
 - Produces: a discoverable skill named `llm-wiki` with valid frontmatter and three non-empty reference files.
 
@@ -550,11 +556,13 @@ git commit -m "feat: add llm-wiki skill (build/query/audit repo wiki)"
 ### Task 4: `wiki-context` skill (Brainstorming memory bridge)
 
 **Files:**
+
 - Create: `skills/wiki-context/SKILL.md`
 - Create: `skills/wiki-context/references/proposal-sections.md`
 - Test: `plugins/repo-wiki-superpowers.test.js` (append one `describe` block)
 
 **Interfaces:**
+
 - Consumes: `expectValidSkill`, `expectNonEmpty` (from Task 1).
 - Produces: a discoverable skill named `wiki-context` with valid frontmatter and one non-empty reference file.
 
@@ -667,11 +675,13 @@ git commit -m "feat: add wiki-context skill (brainstorming memory bridge)"
 ### Task 5: Install docs + README
 
 **Files:**
+
 - Create: `docs/INSTALL.md`
 - Create: `README.md`
 - Test: `plugins/repo-wiki-superpowers.test.js` (append one `describe` block)
 
 **Interfaces:**
+
 - Consumes: `root`, `fs`, `path` (from Task 1).
 - Produces: `docs/INSTALL.md` containing the exact public install spec; a root `README.md`.
 
@@ -826,9 +836,11 @@ git commit -m "docs: add INSTALL guide and README"
 ### Task 6: Full verification + release readiness
 
 **Files:**
+
 - No new source. Verification + optional local dogfood + release notes.
 
 **Interfaces:**
+
 - Consumes: everything above.
 - Produces: a green `make test` run and documented release/tag step.
 

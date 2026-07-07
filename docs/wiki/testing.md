@@ -87,6 +87,7 @@ script is unnecessary. The plugin's plan documents the verification command
 `bun --version` (typically `1.3.14`) and `make test` exiting 0 on green.
 
 ## Source map
+
 - `Makefile` — `test` target delegates to `plugins/Makefile`.
 - `plugins/Makefile` — `test` target runs `bun test`.
 - `plugins/repo-wiki-superpowers.test.js` — the suite; describes, helpers,
@@ -106,6 +107,7 @@ script is unnecessary. The plugin's plan documents the verification command
 - `.devcontainer/devcontainer.json` — `postCreateCommand: make postCreateCommand`.
 
 ## Confidence / gaps
+
 - Solid: how to run; what the suite covers block-by-block; what it
   intentionally does not cover; toolchain install path.
 - Uncertain / to verify: nothing material to the test surface.

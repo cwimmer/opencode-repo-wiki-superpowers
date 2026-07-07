@@ -1,5 +1,10 @@
 default: true
-MD013: false   # line length — long sentences / tables are common
-MD033: false   # inline HTML (used in tables and reference rows)
-MD041: false   # first-line H1 not required (wiki/README files omit)
-MD024: false   # duplicate sibling headings OK (design spec reuses names)
+MD013: false   # line length — long sentences / URLs / tables are common
+MD024: false   # duplicate sibling headings — design spec reuses section names
+MD025: false   # single-h1 — wiki pages have frontmatter title + body title (multiple H1)
+MD031: false   # blanks-around-fences — autofix inserts blanks INSIDE code blocks, breaking copy-paste of install commands
+MD033: false   # inline HTML — used in tables and reference rows
+MD036: false   # emphasis-as-heading — wiki pages use italic for "Updated:" footers
+MD040: false   # fenced code without language — outputs/diffs often have no language
+MD041: false   # first-line H1 required — wiki README/index files omit it
+MD046: false   # code-block-style — both fenced and indented code coexist in wiki

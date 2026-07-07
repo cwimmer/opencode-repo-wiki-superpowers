@@ -96,6 +96,7 @@ git push origin HEAD --tags
 For follow-ups, repeat with `v0.2.0` etc.
 
 ## Source map
+
 - `Makefile` — `postCreateCommand` and `test` targets.
 - `plugins/Makefile` — `test` → `bun test`.
 - `package.json` — plugin manifest; `main` field for OpenCode.
@@ -107,6 +108,7 @@ For follow-ups, repeat with `v0.2.0` etc.
 - `.devcontainer/devcontainer.json` — `postCreateCommand: make postCreateCommand`.
 
 ## Confidence / gaps
+
 - Solid: build (none needed), test entry point, install snippet and the
   flow it triggers, upgrade flow, tag-cut commands.
 - Uncertain / to verify: whether `v0.1.0` has been pushed on GitHub —
