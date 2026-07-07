@@ -1,0 +1,7 @@
+{
+  "name": "repo-wiki-superpowers",
+  "version": "0.1.0",
+  "description": "OpenCode plugin: Karpathy LLM Wiki workflow + Superpowers brainstorming memory bridge",
+  "type": "module",
+  "main": "plugins/repo-wiki-superpowers.js"
+}
